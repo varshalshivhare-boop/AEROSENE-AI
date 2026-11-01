@@ -1,0 +1,170 @@
+{
+  "model": "LightGBM + XGBoost Ensemble (60/40 blend)",
+  "validation_strategy": "5-Fold Spatial GroupKFold by ecological zone",
+  "overall_cv": {
+    "mae": 36.76,
+    "rmse": 47.51,
+    "r2": 0.786
+  },
+  "seasonal": {
+    "monsoon": {
+      "mae": 15.38,
+      "rmse": 18.65,
+      "r2": 0.94,
+      "samples": 1617
+    },
+    "post_monsoon": {
+      "mae": 65.57,
+      "rmse": 74.87,
+      "r2": 0.431,
+      "samples": 889
+    },
+    "summer": {
+      "mae": 27.17,
+      "rmse": 31.27,
+      "r2": 0.848,
+      "samples": 1258
+    },
+    "winter": {
+      "mae": 53.78,
+      "rmse": 60.4,
+      "r2": 0.519,
+      "samples": 1236
+    }
+  },
+  "zone": {
+    "COAST": {
+      "mae": 30.27,
+      "rmse": 38.3,
+      "r2": 0.85,
+      "samples": 818
+    },
+    "DECCN": {
+      "mae": 22.66,
+      "rmse": 28.9,
+      "r2": 0.882,
+      "samples": 421
+    },
+    "DRYZN": {
+      "mae": 15.41,
+      "rmse": 20.54,
+      "r2": 0.955,
+      "samples": 863
+    },
+    "IGP": {
+      "mae": 49.14,
+      "rmse": 59.2,
+      "r2": 0.684,
+      "samples": 2079
+    },
+    "SOUTH": {
+      "mae": 41.56,
+      "rmse": 50.42,
+      "r2": 0.687,
+      "samples": 819
+    }
+  },
+  "feature_importance": {
+    "aod": 0.0972,
+    "hcho_mol_m2": 0.103,
+    "temp_2m_k": 0.0866,
+    "relative_humidity": 0.0693,
+    "wind_speed": 0.0796,
+    "pbl_height_m": 0.0747,
+    "ventilation_idx": 0.0824,
+    "log_ventilation": 0.0336,
+    "fire_count_50km": 0.0246,
+    "min_dist_fire_km": 0.0373,
+    "fire_impact_score": 0.0383,
+    "aod_rh_interaction": 0.0896,
+    "season_sin": 0.086,
+    "season_cos": 0.0978
+  },
+  "features_used": [
+    "aod",
+    "hcho_mol_m2",
+    "temp_2m_k",
+    "relative_humidity",
+    "wind_speed",
+    "pbl_height_m",
+    "ventilation_idx",
+    "log_ventilation",
+    "fire_count_50km",
+    "min_dist_fire_km",
+    "fire_impact_score",
+    "aod_rh_interaction",
+    "season_sin",
+    "season_cos"
+  ],
+  "ensemble_weights": {
+    "lightgbm": 0.6,
+    "xgboost": 0.4
+  },
+  "evaluation_on_full_train": {
+    "note": "Diagnostic only \u2014 not a generalisation estimate. Use CV metrics for that.",
+    "overall": {
+      "mae": 12.03,
+      "rmse": 15.15,
+      "r2": 0.978,
+      "samples": 5000
+    },
+    "seasonal": {
+      "monsoon": {
+        "mae": 8.53,
+        "rmse": 10.62,
+        "r2": 0.981,
+        "samples": 1617
+      },
+      "post_monsoon": {
+        "mae": 14.84,
+        "rmse": 18.13,
+        "r2": 0.967,
+        "samples": 889
+      },
+      "summer": {
+        "mae": 11.07,
+        "rmse": 13.5,
+        "r2": 0.972,
+        "samples": 1258
+      },
+      "winter": {
+        "mae": 15.56,
+        "rmse": 18.96,
+        "r2": 0.953,
+        "samples": 1236
+      }
+    },
+    "zone": {
+      "COAST": {
+        "mae": 12.26,
+        "rmse": 15.18,
+        "r2": 0.976,
+        "samples": 818
+      },
+      "DECCN": {
+        "mae": 10.39,
+        "rmse": 12.78,
+        "r2": 0.977,
+        "samples": 421
+      },
+      "DRYZN": {
+        "mae": 7.24,
+        "rmse": 9.11,
+        "r2": 0.991,
+        "samples": 863
+      },
+      "IGP": {
+        "mae": 12.96,
+        "rmse": 16.01,
+        "r2": 0.977,
+        "samples": 2079
+      },
+      "SOUTH": {
+        "mae": 15.33,
+        "rmse": 18.7,
+        "r2": 0.957,
+        "samples": 819
+      }
+    }
+  }
+}

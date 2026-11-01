@@ -1,0 +1,56 @@
+"""
+ML Prediction Client Interface for Aerosense AI API Server
+Integrates with Phase 2 model_training engine (PM25Estimator) for live inference.
+Falls back to physics-based formula if ML model artifacts are unavailable.
+"""
+import os
+import sys
+
+# ── Dynamic link to Phase 2 ML engine ──────────────────────────
+# In unified layout: aerosense-ai/model_training/src
+_REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
+MODEL_TRAINING_SRC = os.path.join(_REPO_ROOT, "model_training", "src")
+MODEL_TRAINING_ARTIFACTS = os.path.join(_REPO_ROOT, "model_training", "artifacts")
+
+if MODEL_TRAINING_SRC not in sys.path and os.path.exists(MODEL_TRAINING_SRC):
+    sys.path.insert(0, MODEL_TRAINING_SRC)
+
+try:
+    from inference import PM25Estimator, predict_surface_pm25
+    _HAS_ML_ENGINE = True
+    _estimator = PM25Estimator(artifacts_dir=MODEL_TRAINING_ARTIFACTS)
+    print(f"✅ ML Engine loaded from {MODEL_TRAINING_SRC}")
+except Exception as e:
+    print(f"⚠ ML Engine unavailable ({e}). Using physics fallback.")
+    _HAS_ML_ENGINE = False
+    _estimator = None
+
+
+def estimate_pm25(payload: dict) -> dict:
+    """
+    Calls Phase 2 ML estimator if available, otherwise executes physical formula.
+    """
+    if _HAS_ML_ENGINE and _estimator is not None:
+        return _estimator.predict(payload)
+
+    # Physics fallback
+    aod = payload.get("aod")
+    if aod is None or payload.get("cloud_fraction", 0.0) > 0.70:
+        return {
+            "pm25_estimate": None,
+            "confidence": "LOW_CLOUD_COVER",
+            "status": "NO_DATA"
+        }
+
+    pblh = max(payload.get("pbl_height_m", 800.0), 100.0)
+    fires = payload.get("fire_count_50km", 0)
+    est = round((aod * 85.0) + (1200.0 / pblh * 20.0) + (fires * 4.0), 2)
+    return {
+        "pm25_estimate": est,
+        "confidence": "HIGH" if aod < 2.0 else "MEDIUM",
+        "status": "VALID",
+        "derived": {
+            "wind_speed_ms": 2.5,
+            "ventilation_idx": 2.1
+        }
+    }
