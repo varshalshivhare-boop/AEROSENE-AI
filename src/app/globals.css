@@ -1,26 +1,307 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
 @import "tailwindcss";
 
+/* ============================================================
+   AeroSense AI — Global Design System
+   ============================================================ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* ---- Color Tokens ---- */
+  --color-bg-deep:        #020b18;
+  --color-bg-base:        #030e1c;
+  --color-bg-surface:     #071428;
+  --color-bg-elevated:    #0c1f3d;
+  --color-bg-glass:       rgba(7, 20, 40, 0.72);
+
+  --color-border:         rgba(56, 106, 168, 0.18);
+  --color-border-accent:  rgba(56, 193, 214, 0.28);
+
+  --color-cyan:           #38c1d6;
+  --color-cyan-dim:       #1a8fa3;
+  --color-cyan-glow:      rgba(56, 193, 214, 0.15);
+  --color-emerald:        #10b981;
+  --color-emerald-glow:   rgba(16, 185, 129, 0.15);
+  --color-ice:            #7dd3fc;
+  --color-amber:          #f59e0b;
+  --color-amber-glow:     rgba(245, 158, 11, 0.15);
+  --color-orange:         #f97316;
+  --color-red:            #ef4444;
+  --color-maroon:         #7f1d1d;
+  --color-lime:           #84cc16;
+
+  --color-text-primary:   #e2eeff;
+  --color-text-secondary: #8ba8cc;
+  --color-text-muted:     #4a6280;
+  --color-text-accent:    #38c1d6;
+
+  /* ---- Spacing ---- */
+  --space-xs:  4px;
+  --space-sm:  8px;
+  --space-md:  16px;
+  --space-lg:  24px;
+  --space-xl:  40px;
+  --space-2xl: 64px;
+
+  /* ---- Radius ---- */
+  --radius-sm:   6px;
+  --radius-md:   10px;
+  --radius-lg:   16px;
+  --radius-xl:   24px;
+  --radius-full: 9999px;
+
+  /* ---- Blur ---- */
+  --blur-glass:  blur(16px);
+  --blur-subtle: blur(8px);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ---- Base Reset ---- */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--color-bg-deep);
+  color: var(--color-text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ---- Glass Panel ---- */
+
+.glass {
+  background: var(--color-bg-glass);
+  backdrop-filter: var(--blur-glass);
+  -webkit-backdrop-filter: var(--blur-glass);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.glass-sm {
+  background: var(--color-bg-glass);
+  backdrop-filter: var(--blur-subtle);
+  -webkit-backdrop-filter: var(--blur-subtle);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+/* ---- Gradients ---- */
+
+.gradient-radial-cyan {
+  background: radial-gradient(ellipse at top, rgba(56, 193, 214, 0.08) 0%, transparent 70%);
+}
+
+.gradient-hero {
+  background: 
+    radial-gradient(ellipse 120% 80% at 50% -10%, rgba(56, 193, 214, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 60% at 80% 20%, rgba(16, 185, 129, 0.04) 0%, transparent 50%),
+    var(--color-bg-deep);
+}
+
+/* ---- Grid Lines (decorative) ---- */
+
+.grid-overlay {
+  background-image:
+    linear-gradient(rgba(56, 193, 214, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56, 193, 214, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* ---- Typography Utilities ---- */
+
+.font-mono {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+}
+
+.text-gradient-cyan {
+  background: linear-gradient(135deg, #38c1d6 0%, #7dd3fc 50%, #10b981 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-hero {
+  background: linear-gradient(135deg, #e2eeff 0%, #7dd3fc 40%, #38c1d6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ---- Glow Effects ---- */
+
+.glow-cyan {
+  box-shadow: 0 0 20px rgba(56, 193, 214, 0.3), 0 0 60px rgba(56, 193, 214, 0.1);
+}
+
+.glow-amber {
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.4), 0 0 60px rgba(245, 158, 11, 0.15);
+}
+
+.glow-emerald {
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.3), 0 0 60px rgba(16, 185, 129, 0.1);
+}
+
+/* ---- Scrollbar Styling ---- */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-accent);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-cyan-dim);
+}
+
+/* ---- Focus Visible ---- */
+
+:focus-visible {
+  outline: 2px solid var(--color-cyan);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ---- Map Container ---- */
+
+.map-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.maplibregl-map {
+  width: 100%;
+  height: 100%;
+}
+
+/* Override MapLibre attribution */
+.maplibregl-ctrl-attrib {
+  background: rgba(2, 11, 24, 0.8) !important;
+  color: #4a6280 !important;
+  border-radius: 6px !important;
+  font-size: 10px !important;
+}
+
+.maplibregl-ctrl-attrib a {
+  color: #38c1d6 !important;
+}
+
+/* ---- Animations ---- */
+
+@keyframes pulse-ring {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+@keyframes orbit {
+  from { transform: rotate(0deg) translateX(var(--orbit-r, 200px)) rotate(0deg); }
+  to { transform: rotate(360deg) translateX(var(--orbit-r, 200px)) rotate(-360deg); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent 0%, rgba(56, 193, 214, 0.1) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* ---- Reduced Motion ---- */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---- Demo Data Badge ---- */
+
+.demo-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  border-radius: var(--radius-full);
+  color: #f59e0b;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ---- Category Colors ---- */
+
+.cat-good       { color: #22c55e; }
+.cat-satisfactory { color: #86efac; }
+.cat-moderate   { color: #fbbf24; }
+.cat-poor       { color: #f97316; }
+.cat-very-poor  { color: #ef4444; }
+.cat-severe     { color: #fca5a5; }
+.cat-unknown    { color: #64748b; }
+
+/* ---- Skeleton Loading ---- */
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(56, 193, 214, 0.05) 25%,
+    rgba(56, 193, 214, 0.12) 50%,
+    rgba(56, 193, 214, 0.05) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-sm);
+}
+
+/* ---- Recharts overrides ---- */
+
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: rgba(56, 193, 214, 0.08) !important;
+}
+
+.recharts-tooltip-wrapper {
+  outline: none !important;
+}
+
+.recharts-default-tooltip {
+  background: rgba(7, 20, 40, 0.95) !important;
+  border: 1px solid rgba(56, 193, 214, 0.25) !important;
+  border-radius: 10px !important;
+  color: #e2eeff !important;
+  font-size: 12px !important;
+  backdrop-filter: blur(12px) !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4) !important;
 }
