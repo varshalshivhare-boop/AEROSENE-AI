@@ -1,0 +1,14 @@
+# Aerosense AI - Data Pipeline Requirements
+# Virtual environment dependencies for satellite, weather, and air quality ingestion & alignment
+
+pandas>=2.0.0
+numpy>=1.24.0
+geopandas>=0.14.0
+rasterio>=1.3.0
+xarray>=2023.1.0
+shapely>=2.0.0
+requests>=2.31.0
+scipy>=1.11.0
+python-dateutil>=2.8.2
+pyproj>=3.6.0
+pytest>=7.4.0
