@@ -1,0 +1,48 @@
+{
+  "overall": {
+    "mae": 25.89,
+    "rmse": 34.39,
+    "r2": 0.873,
+    "test_samples": 831,
+    "holdout_stations": [
+      "PAT001",
+      "MUM001"
+    ]
+  },
+  "seasonal": {
+    "monsoon": {
+      "mae": 18.82,
+      "rmse": 23.77,
+      "r2": 0.518,
+      "samples": 250
+    },
+    "post_monsoon_stubble": {
+      "mae": 48.07,
+      "rmse": 62.25,
+      "r2": 0.758,
+      "samples": 83
+    },
+    "summer": {
+      "mae": 22.39,
+      "rmse": 27.85,
+      "r2": 0.672,
+      "samples": 350
+    },
+    "winter": {
+      "mae": 33.68,
+      "rmse": 40.98,
+      "r2": 0.7,
+      "samples": 148
+    }
+  },
+  "features_used": [
+    "aod",
+    "temp_2m_k",
+    "relative_humidity",
+    "wind_speed",
+    "pbl_height_m",
+    "ventilation_idx",
+    "fire_count_50km",
+    "min_dist_fire_km"
+  ]
+}
